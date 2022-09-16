@@ -1,19 +1,59 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
 
-const Navbar = ({ setToken }) => {
+const Navbar = ({ logout, token }) => {
     return (
         <header>
-            <nav>
-                <Link to='/'>Home</Link>
-                <Link to='/posts'>Posts</Link>
-                <Link to='/profile'>Profile</Link>
-                <Link to='/register'>Register</Link>
-                <Link to='/login'>Login</Link>
-                <Link to='/' onClick={() => {
-                    window.localStorage.removeItem('token');
-                    setToken('');
-                    }}>Logout</Link>
+            <nav className='Navbar'>
+                <Button>
+                    <Link
+                        style=
+                        {{ textDecoration: 'none' }}
+                        to='/'>
+                        Home
+                    </Link>
+                </Button>
+                <Button>
+                    <Link
+                        style=
+                        {{ textDecoration: 'none' }}
+                        to='/posts'>
+                        Posts
+                    </Link>
+                </Button>
+                {
+                    token ? (
+                        <>
+                            <Button>
+                                <Link
+                                    style=
+                                    {{ textDecoration: 'none' }}
+                                    to='/profile'>
+                                    Profile
+                                </Link>
+                            </Button>
+                            <Button>
+                                <Link
+                                    style=
+                                    {{ textDecoration: 'none' }}
+                                    to='/'
+                                    onClick={() => logout()}>
+                                    Logout
+                                </Link>
+                            </Button>
+                        </>
+                    ) : (
+                        <Button>
+                            <Link
+                                style=
+                                {{ textDecoration: 'none' }}
+                                to='/login'>
+                                Login
+                            </Link>
+                        </Button>
+                    )
+                }
             </nav>
         </header>
     )
